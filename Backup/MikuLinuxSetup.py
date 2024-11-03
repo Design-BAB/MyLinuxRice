@@ -18,12 +18,18 @@ def install_package(package_name):
 def install_flatpak(package_name):
     try:
         #subprocess.run(['sudo', 'apt', 'install', package_name, '-y'], check=True)
-        subprocess.run(['sudo', 'flatpak', 'install', package_name], check=True)        
+        subprocess.run(['sudo', 'flatpak', 'install', 'flathub', package_name], check=True)        
     except subprocess.CalledProcessError as e:
         print(f"An error occurred: {e}")
 
 def strip_replace(file1, file2):
     shutil.copyfile(file1, file2)
+
+def install_lazy():
+    try:
+        subprocess.run(['sudo', 'git', 'clone', 'https://github.com/LazyVim/starter', '~/.config/nvim'], check=True)    
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred: {e}")
 #right here we are putting the program title.
 username = os.getlogin()
 username = "/home/" + username + "/"
@@ -49,13 +55,12 @@ shutil.copyfile('bashrc', bashrcLocation)
 #
 print("")
 print("You should be set up!")
-chooice1 = input("Would you like to addtionally install neovim with LazyVim config? 📝 (Y/n)")
+chooice1 = input("Would you like to addtionally install neovim with LazyVim config? ✏️   (Y/n)")
 if chooice1 == 'Y':
     print("Note: we are going to install this using Flatpak instead of the APT repository.")
     print("On POP_os, Flatpak has seem to have the more up to date and stable version of the program.")
     pause = input("Please press ENTER to continue...")
-    #install_flatpak('io.neovim.nvim')
-    print("")
+    install_flatpak('io.neovim.nvim')
     print("We are finished with nvim installation!")
 chooice2 = input("It makes sence that we need a cool task manager, right? Shall we Install btop?📈 (Y/n)")
 if chooice2 == 'Y':
