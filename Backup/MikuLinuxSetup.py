@@ -1,5 +1,5 @@
 #Author: DesignBAB
-#Date: 10-20
+#Date: 10-20-24
 
 #!/usr/bin/env python3
 import subprocess # to run O.S.commands
@@ -10,14 +10,12 @@ import shutil
 #defining the funtions
 def install_package(package_name):
     try:
-        #subprocess.run(['sudo', 'apt', 'install', package_name, '-y'], check=True)
         subprocess.run(['sudo', 'apt', 'install', package_name], check=True)        
     except subprocess.CalledProcessError as e:
         print(f"An error occurred: {e}")
 
 def install_flatpak(package_name):
     try:
-        #subprocess.run(['sudo', 'apt', 'install', package_name, '-y'], check=True)
         subprocess.run(['sudo', 'flatpak', 'install', 'flathub', package_name], check=True)        
     except subprocess.CalledProcessError as e:
         print(f"An error occurred: {e}")
@@ -50,7 +48,6 @@ pause = input("Please press ENTER to continue...")
 install_package('neofetch')
 bashrcLocation = username + ".bashrc"
 shutil.copyfile('bashrc', bashrcLocation)
-#
 #
 #
 print("")
